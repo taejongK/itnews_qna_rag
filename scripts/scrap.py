@@ -5,7 +5,8 @@ import re
 
 import pandas as pd
 import sqlite3
-from datetime import date
+
+from dotenv import load_dotenv
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
@@ -22,6 +23,9 @@ from langchain_community.vectorstores import FAISS
 
 
 def get_article_links(section_url, num_articles=10):
+    '''
+    section_url에서 num_articles 개수만큼의 기사 링크를 수집하는 함수
+    '''
     response = requests.get(section_url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -58,36 +62,21 @@ def get_article_data(link):
     return loader
 
 
-if __name__ == "__main__":
-    # IT/과학 섹션 URL
-    section_url = "https://news.naver.com/section/105"
-    article_links = get_article_links(section_url, num_articles=100)
-
-    # 각 기사 URL에서 기사 내용을 수집하는 코드
+def get_documents(article_links: list) -> list:
     documents = []
     for link in article_links:
-        # loader = WebBaseLoader(link)
         loader = get_article_data(link)
         try:
-            # print(link)
             documents.extend(loader.load())
         except Exception as e:
             print(e)
             pass
-
     # documents 리스트에 각 기사의 내용이 저장됨
     print(f"Collected {len(documents)} articles")
+    return documents
 
-    summary_keywords_prompt = PromptTemplate.from_template(
-        """Extract a brief summary and five keywords from the following text. Ensure that the output is Korean. The output should be formatted in JSON as follows:
 
-    {{
-    "summary": "Your summary here",
-    "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"]
-    }}
-
-    Text: {input_text}"""
-    )
+def get_summary_keywords(summary_keywords_prompt):
 
     # 문서 요약 추출 봇 모델
     summary_keywords_llm = ChatOpenAI(
@@ -98,13 +87,17 @@ if __name__ == "__main__":
         | summary_keywords_llm
         | StrOutputParser()
     )
+    return extract_chain3
 
+
+def get_itnews_data(llm, documents):
+    from datetime import date
+    
     today_date = date.today().strftime("%Y-%m-%d")
-
     itnews_data = []
     for doc in documents:
         # 요약과 키워드 추출
-        sumandkey = eval(extract_chain3.invoke(doc.page_content))
+        sumandkey = eval(llm.invoke(doc.page_content))
 
         source = doc.metadata['source']  # primary key
         date = today_date
@@ -113,9 +106,12 @@ if __name__ == "__main__":
         summary = sumandkey['summary']
         keywords = f"{sumandkey['keywords']}"
         itnews_data.append((source, date, title, content, summary, keywords))
+        return itnews_data
 
+
+def save2sql(itnews_data, sqldb_path="data/itnews.db"):
     # 1. connect to database
-    connection = sqlite3.connect("data/itnews.db", timeout=30)
+    connection = sqlite3.connect(sqldb_path, timeout=30)
     cursor = connection.cursor()
 
     # 2. create table
@@ -130,10 +126,8 @@ if __name__ == "__main__":
                 )
                 """)
 
-    # 3. insert data
-    for data in itnews_data:
-        cursor.executemany(
-            "INSERT OR IGNORE INTO itnews (url, date, title, content, summary, keywords) VALUES (?, ?, ?, ?, ?, ?)", itnews_data)  # 중복되는 데이터는 무시
+    cursor.executemany(
+        "INSERT OR IGNORE INTO itnews (url, date, title, content, summary, keywords) VALUES (?, ?, ?, ?, ?, ?)", itnews_data)  # 중복되는 데이터는 무시
 
     # 4. commit
     connection.commit()
@@ -142,6 +136,36 @@ if __name__ == "__main__":
     cursor.close()
     connection.close()
 
+
+if __name__ == "__main__":
+    # API 키 정보 로드
+    load_dotenv()
+
+    # IT/과학 섹션 URL
+    section_url = "https://news.naver.com/section/105"
+    article_links = get_article_links(section_url, num_articles=100)
+
+    summary_keywords_prompt = PromptTemplate.from_template(  # 요약과 키워드 추출 프롬프트
+        """Extract a brief summary and five keywords from the following text. Ensure that the output is Korean. The output should be formatted in JSON as follows:
+
+    {{
+    "summary": "Your summary here",
+    "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"]
+    }}
+
+    Text: {input_text}"""
+    )
+
+    documents = get_documents(article_links)  # 기사 내용 수집
+
+    extract_chain3 = get_summary_keywords(
+        summary_keywords_prompt)  # 요약과 키워드 추출 모델 생성
+
+    itnews_data = get_itnews_data(extract_chain3, documents)
+
+    save2sql(itnews_data, sqldb_path="data/itnews.db")  # sqlite에 저장
+
+    # 데이터프레임으로 변환
     now_news_df = pd.DataFrame(itnews_data, columns=[
         'url', 'date', 'title', 'content', 'summary', 'keywords'])
 
