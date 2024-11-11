@@ -70,7 +70,7 @@ if st.button("질문하기"):
         # 질문에 대한 답변 로직
         # response_text = f"'{qna_input}'에 대한 답변을 여기에 표시합니다."  # 답변 예시
         qna_chat = ITNewsQnA(api_key=os.getenv(
-            "OPENAI_API_KEY"), faiss_path=faiss_path)  # QnA 객체 생성
+            "OPENAI_API_KEY"), faiss_path=faiss_path, itnews_df=itnews_df)  # QnA 객체 생성
         rag_chain = qna_chat.build_rag_chain()  # RAG 모델 생성
         answer, title_list, source_list = qna_chat.get_answer(
             qna_input, rag_chain)  # 질문에 대한 답변

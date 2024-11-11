@@ -1,0 +1,4 @@
+﻿Status,Name,Due,Projects,Priority,Progress,Scrum
+Done,뉴스기사 클롤링 해서 데이터 베이스 구축하고 키워드 추출,"November 6, 2024",뉴스기사 클롤링 RAG 프로젝트 (https://www.notion.so/RAG-132b81594c638073aa36f1cbc5604736?pvs=21),High,,"뉴스 기사 크롤링 (https://www.notion.so/136b81594c63808eb03acefa9413414a?pvs=21), 데이터 베이스에 저장 (https://www.notion.so/136b81594c6380529c53dac7f68fe3dc?pvs=21), 키워드와 요약 추축 (https://www.notion.so/136b81594c63809cae85d906c3e0617a?pvs=21)"
+Done,뉴스기사 Q&A 프로젝트,"November 6, 2024",뉴스기사 클롤링 RAG 프로젝트 (https://www.notion.so/RAG-132b81594c638073aa36f1cbc5604736?pvs=21),High,,테디노트 프로젝트 따라하기 (https://www.notion.so/136b81594c6380fda78be9244f7f4c0a?pvs=21)
+Done,선택된 키워드와 관련된 기사 찾아서 사용자의 qna하기,"November 8, 2024",뉴스기사 클롤링 RAG 프로젝트 (https://www.notion.so/RAG-132b81594c638073aa36f1cbc5604736?pvs=21),High,,"기본적인 틀 구현 (https://www.notion.so/138b81594c638009b748fa79db68b061?pvs=21), ensemble retriever 적용 (https://www.notion.so/ensemble-retriever-13ab81594c6380398e13d3cea12f2af1?pvs=21)"
