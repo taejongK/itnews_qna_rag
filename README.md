@@ -1,12 +1,11 @@
 # 뉴스기사 클롤링 RAG 프로젝트
 
 ## Abstract
+![image](https://github.com/user-attachments/assets/cebb0ef2-867a-4dac-a9fe-63a6ae201c7e)
+![image 1](https://github.com/user-attachments/assets/ae44d0dd-156b-45e8-a473-5f05d304d5d2)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image.png)
+![image 2](https://github.com/user-attachments/assets/be06f52f-8681-4acd-bc6d-cf638412fde9)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%201.png)
-
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%202.png)
 
 # Introduction
 
@@ -33,25 +32,27 @@
 - 퀄리티를 비교하기 전에 우선 비용과 소요시간 측면에서 비교
 - gpt-4와 gpt-3.5-turbo 모델 비교
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%203.png)
+![image 3](https://github.com/user-attachments/assets/67319723-7310-4a45-9245-817bfa122d21)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%204.png)
+![image 4](https://github.com/user-attachments/assets/adfadade-aea4-4fc4-8572-3b30bc72c8be)
 
 - 어떤 모델을 사용하던지 input token의 수는 같지만 output token의 수는 3배 가까이 차이
 
 https://openai.com/api/pricing/
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%205.png)
+![image 5](https://github.com/user-attachments/assets/9db4bfd0-676d-4743-9e59-c3ccb33a1a9a)
 
 openai의 홈페이지에 나온 가격 표에 따르면 gpt-4모델은 gpt-3.5-turbo 모델에 비해 input에서는 약 60배, ouput에서는 약 108배 비쌈
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%206.png)
+![image 6](https://github.com/user-attachments/assets/53de48bf-d53c-49d3-bcaa-8438ffd2cb32)
+
 
 ### 품질 평가
 
-[naver_news_summary_evaluation.csv](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/naver_news_summary_evaluation.csv)
+![image 7](https://github.com/user-attachments/assets/62820418-a16b-45f9-a19f-90f7b052ce9e)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%207.png)
+![image 8](https://github.com/user-attachments/assets/49633054-a397-461c-b859-c25a5579256a)
+
 
 - 구글 스프래드시트를 사용하여 QA를 진행
 - gpt-3.5-turbo모델을 사용하여 원본과 각 모델로 요약한 결과를 입력하여 요약 결과를 평가하고 10점 만점의 점수로 출력하는 프롬프트를 사용
@@ -60,17 +61,16 @@ openai의 홈페이지에 나온 가격 표에 따르면 gpt-4모델은 gpt-3.5-
 =GPT("Compare the original text with the summaries and evaluate how well the summaries are written on a scale of 1 to 10, outputting only the scores and no other text." & $L2)
 ```
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%208.png)
+![image 9](https://github.com/user-attachments/assets/bc0029e4-6652-4001-a790-8e61d040f85b)
 
 - ㅌ두 모델의 점수 차는 약 1.3 점 정도, 요금차이와 속도 차이를 생각했을 때, gpt-3.5-turbo를 사용하는 것이 합리적이라고 판단했습니다.
 
 ### WordsCloud 결과
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%209.png)
-
+![image 10](https://github.com/user-attachments/assets/06ad5fa7-180b-4e98-b0d7-d442bca8b4a7)
 ## VectorDB(Faiss)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%2010.png)
+
 
 출처: [https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/](https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/)
 
@@ -86,7 +86,7 @@ openai의 홈페이지에 나온 가격 표에 따르면 gpt-4모델은 gpt-3.5-
 - 질문에 대한 답변 속도가 너무 느림
 - 잘못된 질문을 하면 키워드도 전혀 상관없는 답변을 출력
   
-    ![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%2011.png)
+![image 11](https://github.com/user-attachments/assets/3366c4a2-6ef2-4fa5-a4d8-a36e23ab9681)
     
     ```jsx
     query = "LG유플러스가 익시오랑 뭘 했나?"
@@ -100,8 +100,8 @@ openai의 홈페이지에 나온 가격 표에 따르면 gpt-4모델은 gpt-3.5-
     ```
     
     - 유플러스와 익시오 관련 질문을 했는데 전혀 상관없는 네이버플러스 이야기를 함
+![image 12](https://github.com/user-attachments/assets/6b33447a-9815-461a-a0ef-8a0c1a711078)
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%2012.png)
 
 ### MultiQuery Retriever
 
@@ -122,7 +122,7 @@ https://blog.naver.com/shino1025/222240603533
 
 TF-IDF기반의 검색 모델인 BM25의 특징을 사용자가 검색한 주요 키워드를 최대한 포함하도록 한다는 점이다. 
 
-![image.png](%E1%84%82%E1%85%B2%E1%84%89%E1%85%B3%E1%84%80%E1%85%B5%E1%84%89%E1%85%A1%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%86%BC%20RAG%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20132b81594c638073aa36f1cbc5604736/image%2013.png)
+![image 13](https://github.com/user-attachments/assets/2055c5fc-67c5-4201-a42d-052d1141b001)
 
 - 간단히 설명하자면 저장된 문서들의 주요 키워드 랭킹을 매기고 사용자의 질문에서도 핵심 키워드를 추출하여 문서를 검색
 
