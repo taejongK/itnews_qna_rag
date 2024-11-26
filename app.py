@@ -46,14 +46,10 @@ if st.button("뉴스 요약 가져오기"):
     if keyword:
         # 키워드에 대한 요약 내용을 가져오는 로직
         # 요약 내용 생성 예시
-        # summary_text = f"'{keyword}'에 대한 뉴스 요약입니다. 자세한 내용은 여기에 표시됩니다."
         selected_summary = itnews_df[itnews_df.keywords.apply(
             lambda x: keyword in x)].summary.tolist()
         st.session_state['summary_text'] = load_summary(
             selected_summary, api_key=os.getenv("OPENAI_API_KEY"))
-        # summary_text = load_summary(
-        #     selected_summary, api_key=os.getenv("OPENAI_API_KEY"))
-        # st.write(summary_text)
     else:
         st.warning("키워드를 입력해주세요.")
 
