@@ -60,17 +60,13 @@ openai의 홈페이지에 나온 가격 표에 따르면 gpt-4모델은 gpt-3.5-
 ```jsx
 =GPT("Compare the original text with the summaries and evaluate how well the summaries are written on a scale of 1 to 10, outputting only the scores and no other text." & $L2)
 ```
-
+### WordsCloud 결과
 ![image 9](https://github.com/user-attachments/assets/bc0029e4-6652-4001-a790-8e61d040f85b)
 
-- ㅌ두 모델의 점수 차는 약 1.3 점 정도, 요금차이와 속도 차이를 생각했을 때, gpt-3.5-turbo를 사용하는 것이 합리적이라고 판단했습니다.
+- 두 모델의 점수 차는 약 1.3 점 정도, 요금차이와 속도 차이를 생각했을 때, gpt-3.5-turbo를 사용하는 것이 합리적이라고 판단했습니다.
 
-### WordsCloud 결과
-
-![image 10](https://github.com/user-attachments/assets/06ad5fa7-180b-4e98-b0d7-d442bca8b4a7)
 ## VectorDB(Faiss)
-
-
+![image 10](https://github.com/user-attachments/assets/06ad5fa7-180b-4e98-b0d7-d442bca8b4a7)
 
 출처: [https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/](https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/)
 
